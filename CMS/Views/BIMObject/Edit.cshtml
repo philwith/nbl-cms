@@ -1,0 +1,60 @@
+﻿@model NBL.CMS.Models.BIMObjectEditViewModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm("Edit", "BIMObject", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>BIMObjectEditViewModel</legend>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Description)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Description)
+            @Html.ValidationMessageFor(model => model.Description)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.HtmlDescription)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.HtmlDescription)
+            @Html.ValidationMessageFor(model => model.HtmlDescription)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ShortUrl)
+            @Html.ValidationMessageFor(model => model.ShortUrl)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.BIMThumbnail.FileData)
+        </div>
+         <div class="editor-field">
+            @Html.EditorFor(model => model.BIMThumbnail)
+        </div>
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index", new { p = ViewBag.Page, ps = ViewBag.PageSize, so = ViewBag.CurrentSort, cs = ViewBag.CurrentSearch  })
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/tinymce.js")
+}

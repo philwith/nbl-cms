@@ -1,0 +1,65 @@
+﻿@model PagedList.PagedList<NBL.CMS.Models.BIMObjectListViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@using PagedList.Mvc;
+@using PagedList;
+
+<h2>Index</h2>
+
+@using (Html.BeginForm())
+{
+    <p>
+        Search By Name : @Html.TextBox("s", ViewBag.CurrentSearch as string) &nbsp;
+        <input type="submit" value="Search" />
+    </p>
+}
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+@Html.PagedListPager(Model, p => Url.Action("Index", new {p, ps = ViewBag.PageSize, so = ViewBag.CurrentSort, cs = ViewBag.CurrentSearch  }) )
+<table>
+    <tr>
+        <th>
+            @Html.ActionLink(@Html.DisplayNameFor(model => model.First().Name).ToString(), "Index", new { p = ViewBag.Page, ps = ViewBag.PageSize, so = ViewBag.NameSortParm, cs = ViewBag.CurrentSearch })
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().StateFK)
+        </th>
+        <th>
+            @Html.ActionLink(@Html.DisplayNameFor(model => model.First().Version).ToString(), "Index", new { p = ViewBag.Page, ps = ViewBag.PageSize, so = ViewBag.VersionSortParm, cs = ViewBag.CurrentSearch })
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StateFK)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Version)
+        </td>
+        <td>
+            <ul>
+                <li>@Html.ActionLink("Edit", "Edit", new { id=item.ID , p = ViewBag.Page, ps = ViewBag.PageSize, so = ViewBag.CurrentSort, cs = ViewBag.CurrentSearch  })</li>
+                <li> @Html.ActionLink("Details", "Details", new { id=item.ID, p = ViewBag.Page, ps = ViewBag.PageSize, so = ViewBag.CurrentSort, cs = ViewBag.CurrentSearch  })</li>
+                <li>@Html.ActionLink("Delete", "Delete", new { id=item.ID, p = ViewBag.Page, ps = ViewBag.PageSize, so = ViewBag.CurrentSort, cs = ViewBag.CurrentSearch  })</li>
+            </ul>
+        </td>
+    </tr>
+}
+
+</table>
