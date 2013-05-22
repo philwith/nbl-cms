@@ -19,8 +19,6 @@ namespace NBL.CMS.Controllers
 
         public BIMObjectController()
         {
-
-         
             Mapper.CreateMap<BIMObject, BIMObjectDetailsViewModel>();
             Mapper.CreateMap<BIMObject, BIMObjectCreateViewModel>();
             Mapper.CreateMap<BIMObject, BIMObjectEditViewModel>();
